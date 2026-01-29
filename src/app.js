@@ -1,18 +1,30 @@
-const btn = document.querySelector("button");
-const ul = document.querySelector("ul");
-const liItems = ul.querySelectorAll("li");
-
 let size = 10;
-let grow = true;
+let orderElement = 1;
 
-function forEachLoop() {
-  liItems.forEach((li) => {
-    li.style.display = "block";
-    li.style.fontSize = size + "px";
-  });
-  if (grow) {
-    size++;
+const init = () => {
+  // Tworzenie przycisku
+  const btn = document.createElement("button");
+  window.document.body.appendChild(btn);
+  btn.innerText = "Dodaj 10 elementów";
+  // Tworzymy liste ul
+  const ulElement = document.createElement("ul");
+  window.document.body.appendChild(ulElement);
+
+  btn.addEventListener("click", createLiElement);
+};
+
+const createLiElement = () => {
+  for (let i = 0; i < 10; i++) {
+    const liElement = document.createElement("li");
+
+    liElement.innerText = `Element nr ${orderElement}`;
+    liElement.style.color = "white";
+    liElement.style.fontSize = size + "px";
+    liElement.style.display = "block";
+    orderElement += 1;
+    size += 2;
+    window.document.querySelector("ul").appendChild(liElement);
   }
-}
+};
 
-btn.addEventListener("click", forEachLoop);
+init();
